@@ -41,37 +41,42 @@ void print_triangle(struct point *triangle) {
 /*
  * int in_bounds(point, triangle) - determine whether a point lies within a triangle
  */
-int in_bounds(struct point p, struct point *triangle) {
-    int sign = 0, flag = 0;
-    for (int i = 0; i < 3; i++) {
-        swap(&p, triangle, i);
-        if (!flag) {
-            flag = 1;
-            printf("\tsetting sign to %d\n", area(triangle) > 0);
-            sign = area(triangle) > 0;
-            continue;
-        }
-        if (sign != area(triangle) > 0) {
-            printf("\ttriangle is:\n");
-            print_triangle(triangle);
-            printf("\tsign is %d but area is %lf\n", sign, area(triangle));
+int in_bounds(struct point *p, struct point *triangle) {
+    // TODO loop this and _actually_ pay attention to indices this time
+    int sign = 0;
+    swap(p, triangle, 0);
+    triangle[3] = triangle[0];
+    sign = area(triangle) > 0;
+    swap(p, triangle, 0);
+    triangle[3] = triangle[0];
+    swap(p, triangle, 1);
+    if (sign != (area(triangle) > 0)) {
+        //printf("a > 0: %d\n", area(triangle) > 0);
+        goto fail;
+    }
+    swap(p, triangle, 1);
+    swap(p, triangle, 2);
+    if (sign != (area(triangle) > 0)) {
+        //printf("a > 0: %d\n", area(triangle) > 0);
+        goto fail;
+    }
+    swap(p, triangle, 2);
+
+    if (0) {
+fail:
             return 0;
-        }
-        swap(&p, triangle, i);
     }
     return 1;
 }
 
 int main() {
     struct point triangle[4];
+    struct point p;
     for (int i = 0; i < 3; i++) {
         scanf("%d %d", &triangle[i].x, &triangle[i].y);
     }
-    struct point p;
-    scanf("%d %d", &p.x, &p.y);
     triangle[3] = triangle[0];
-    printf("%lf\n", area(triangle));
-    printf("%d\n", in_bounds(p, triangle));
-
+    scanf("%d %d", &p.x, &p.y);
+    printf("%d\n", in_bounds(&p, triangle));
     return 0;
 }
