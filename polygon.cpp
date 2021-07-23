@@ -23,7 +23,7 @@ double area_triangle(polygon &p, int offset) {
  * sign - return whether the area is positive, 0, or negative
  */
 int sign(double a) {
-    return a == 0 ? a : a / abs(a);
+    return a >= 0 ? a : -a;
 }
 
 /*
