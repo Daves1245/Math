@@ -27,7 +27,7 @@ int sign(double a) {
 }
 
 /*
- * inbounds - return true iff point p lies within the polygon poly
+ * inbounds - return true iff point p lies within the convex polygon poly
  */
 bool inbounds(polygon &poly, point &p) {
     int n = poly.size();
@@ -50,6 +50,7 @@ int main() {
     cin >> n;
     cout << n << endl;
     polygon poly(n + 1);
+    cout << "Points of convex polygon: " << endl;
     for (int i = 0; i < n; i++) {
         cin >> poly[i].first >> poly[i].second;
     }
