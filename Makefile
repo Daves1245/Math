@@ -3,3 +3,6 @@ poly:
 
 all:
 	gcc -Wall -O0 -g3 point_in_triangle.c -o run -lm
+
+prime:
+	g++ fastprimefact.cpp -o run && ./run

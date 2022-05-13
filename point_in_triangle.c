@@ -76,6 +76,7 @@ int main() {
         scanf("%d %d", &triangle[i].x, &triangle[i].y);
     }
     triangle[3] = triangle[0];
+    printf("area: %lf\n", area(triangle));
     scanf("%d %d", &p.x, &p.y);
     printf("%d\n", in_bounds(&p, triangle));
     return 0;

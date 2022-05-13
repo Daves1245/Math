@@ -14,7 +14,7 @@ typedef vector<point> polygon;
 double area_triangle(polygon &p, int offset) {
     double area = 0;
     for (int i = 0; i < 3; i++) {
-        area += (double) p[offset + i].first * p[offset + i + 1].second - p[offset + i + 1].first * p[offset + i].second;
+        area += (double) p[offset + (i % 3)].first * p[offset + (i + 1) % 3].second - p[offset + (i + 1) % 3].first * p[offset + (i % 3)].second;
     }
     return area / 2;
 }
@@ -23,7 +23,7 @@ double area_triangle(polygon &p, int offset) {
  * sign - return whether the area is positive, 0, or negative
  */
 int sign(double a) {
-    return a >= 0 ? a : -a;
+    return a > 0 ? 1 : a < 0 ? -1 : 0;
 }
 
 /*
@@ -48,7 +48,6 @@ int main() {
 
     cout << "Number of vertices: " << endl;
     cin >> n;
-    cout << n << endl;
     polygon poly(n + 1);
     cout << "Points of convex polygon: " << endl;
     for (int i = 0; i < n; i++) {
